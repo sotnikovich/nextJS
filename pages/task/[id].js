@@ -10,7 +10,7 @@ export default function Task({ task }) {
       <h1>{task.title}</h1>
       <hr />
       <p>{task.body}</p>
-      <p>{task.date}</p>
+      <p className="date">{task.date}</p>
       <button onClick={clickHandler}>Назад к списку</button>
     </>
   );
