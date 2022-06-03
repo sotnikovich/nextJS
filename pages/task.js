@@ -1,13 +1,13 @@
 import Router from "next/router";
 
-export default function Model() {
+export default function Task() {
   const clickHandler = () => {
     Router.push("/");
   };
 
   return (
     <>
-      <h1>Model page</h1>
+      <h1>Task page</h1>
       <button onClick={clickHandler}>Назад к списку</button>
     </>
   );

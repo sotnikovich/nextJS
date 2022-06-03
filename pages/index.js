@@ -1,25 +1,30 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import Link from "next/link";
 
-export default function Index() {
-  const [tasks, setTasks] = useState([]);
-
-  useEffect(() => {
-    async function load() {
-      const response = await fetch("http://localhost:4200/tasks");
-      const json = await response.json();
-      setTasks(json);
-    }
-    load();
-  }, []);
-
+export default function Index({ tasks }) {
   return (
     <>
       <Head>
         <title>Список задач</title>
       </Head>
       <h1>Список задач</h1>
-      <ul>{JSON.stringify(tasks)}</ul>
+      <ul>
+        {tasks.map((task) => (
+          <li key={task.id}>
+            <Link href={`/task/${task.id}`}>
+              <a>{task.title}</a>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </>
   );
 }
+
+Index.getInitialProps = async () => {
+  const response = await fetch("http://localhost:4200/tasks");
+  const tasks = await response.json();
+  return {
+    tasks,
+  };
+};
